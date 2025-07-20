@@ -1,5 +1,6 @@
 import * as THREE from 'three';
 import Asteroid from './asteroid.js';
+import FlyControls from './flycontrols.js';
 
 const canvas = document.querySelector('#c');
 const renderer = new THREE.WebGLRenderer({antialias: true, canvas});
@@ -9,6 +10,8 @@ const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.inner
 const color = 0xFFFFFF;
 const intensity = 3;
 const light = new THREE.DirectionalLight(color, intensity);
+const flyControls = new FlyControls(camera);
+const clock = new THREE.Clock();
 
 light.position.set(0, 0, 20);
 scene.add(light);
@@ -44,6 +47,9 @@ function animate() {
             cube.rotate(rot, rot, 0);
         }
     });
+
+    let delta = clock.getDelta();
+    flyControls.update(delta);
 
     renderer.render( scene, camera );
 }
