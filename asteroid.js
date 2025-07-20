@@ -1,4 +1,5 @@
 import * as THREE from "three";
+import {Mesh} from "three";
 
 const BLACK = 0x000000;
 const GRAY = 0x606060;
@@ -48,6 +49,7 @@ class Asteroid {
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(this.x, this.y, this.z);
         scene.add(this.mesh);
+        return this.mesh;
     }
 
     rotate(x, y, z) {

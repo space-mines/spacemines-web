@@ -22,6 +22,7 @@ scene.add(light);
 renderer.setSize( window.innerWidth, window.innerHeight );
 renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
+document.onmouseup = onMouseDown;
 
 const asteroids = [
     new Asteroid(0, 0, 0, -1),
@@ -33,9 +34,10 @@ const asteroids = [
     new Asteroid(5, 5, 5, 5),
     new Asteroid(6, 6, 6, 6),
 ]
+const mineMeshes = [];
 asteroids.forEach(asteroid => {
     if(asteroid.radiation !== 0) {
-        asteroid.addToScene(scene);
+        mineMeshes.push(asteroid.addToScene(scene));
     }
 })
 
@@ -55,5 +57,27 @@ function animate() {
     flyControls.update(delta);
 
     renderer.render( scene, camera );
+}
+
+function onMouseDown(event) {
+    console.log( event );
+    let vector = new THREE.Vector3();
+
+    vector.set(
+        ( event.clientX / window.innerWidth ) * 2 - 1,
+        -( event.clientY / window.innerHeight ) * 2 + 1,
+        0.5);
+
+    vector.unproject(camera);
+
+    let raycaster = new THREE.Raycaster(camera.position, vector.sub(camera.position).normalize());
+    let intersects = raycaster.intersectObjects(mineMeshes);
+    let selected;
+
+    for(let i = 0; i < intersects.length; ++i) {
+        selected = intersects[i].object;
+        selected.position.z += 1;
+        console.log(selected);
+    }
 }
 
