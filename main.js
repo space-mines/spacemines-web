@@ -13,6 +13,10 @@ const light = new THREE.DirectionalLight(color, intensity);
 const flyControls = new FlyControls(camera);
 const clock = new THREE.Clock();
 
+flyControls.movementSpeed = 15;
+flyControls.domElement = document.querySelector("#WebGL-output");
+flyControls.rollSpeed = Math.PI / 24;
+
 light.position.set(0, 0, 20);
 scene.add(light);
 

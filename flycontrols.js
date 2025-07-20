@@ -20,7 +20,7 @@ class FlyControls {
 
         // internals
 
-        this.tmpQuaternion = new THREE.Quaternion();
+        this.tmpQuaternion = new Quaternion();
 
         this.moveState = {
             up: 0,
@@ -59,16 +59,15 @@ class FlyControls {
 
     }
 
-    handleEvent(event) {
-        if (typeof this[event.type] == 'function') {
-            this[event.type](event);
-        }
-    }
-
     keydown(event) {
+
+        if( event.altKey ) {
+            return;
+        }
+
         switch (event.keyCode) {
 
-            case 16: /* shift */
+            case event.shiftKey: /* shift */
                 this.movementSpeedMultiplier = .1;
                 break;
 
@@ -177,7 +176,6 @@ class FlyControls {
     }
 
     update(delta) {
-
         let moveMult = delta * this.movementSpeed;
         let rotMult = delta * this.rollSpeed;
 
@@ -190,8 +188,6 @@ class FlyControls {
 
         // expose the rotation vector for convenience
         this.object.rotation.setFromQuaternion(this.object.quaternion, this.object.rotation.order);
-
-
     }
 
     updateMovementVector() {
@@ -212,30 +208,9 @@ class FlyControls {
         this.rotationVector.y = (-this.moveState.yawRight + this.moveState.yawLeft);
         this.rotationVector.z = (-this.moveState.rollRight + this.moveState.rollLeft);
 
-        //console.log( 'rotate:', [ this.rotationVector.x, this.rotationVector.y, this.rotationVector.z ] );
+        console.log( 'rotate:', [ this.rotationVector.x, this.rotationVector.y, this.rotationVector.z ] );
 
     }
-
-    getContainerDimensions() {
-
-        if (this.domElement !== document) {
-
-            return {
-                size: [this.domElement.offsetWidth, this.domElement.offsetHeight],
-                offset: [this.domElement.offsetLeft, this.domElement.offsetTop]
-            };
-
-        } else {
-
-            return {
-                size: [window.innerWidth, window.innerHeight],
-                offset: [0, 0]
-            };
-
-        }
-
-    }
-
 }
 
 export default FlyControls;
