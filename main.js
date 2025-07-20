@@ -27,20 +27,24 @@ function create(geometry, color, x) {
 }
 
 const geometry = new THREE.BoxGeometry( 1, 1, 1 );
-const cube1 = create(geometry, 0x44aa88, -1);
-const cube2 = create(geometry, 0x44aa88, 1);
+const cubes = [
+    create(geometry, 0x44aa88,  0),
+    create(geometry, 0x8844aa, -2),
+    create(geometry, 0xaa8844,  2),
+];
 
-scene.add( cube1 );
+scene.add( cubes );
 
 camera.position.z = 5;
 
 function animate() {
 
-    cube1.rotation.x += 0.01;
-    cube1.rotation.y += 0.01;
-
-    cube2.rotation.x += 0.01;
-    cube2.rotation.y += 0.01;
+    cubes.forEach((cube, ndx) => {
+        const speed = 1 + ndx * .1;
+        const rot = 0.01 * speed;
+        cube.rotation.x += rot;
+        cube.rotation.y += rot;
+    });
 
     renderer.render( scene, camera );
 }
