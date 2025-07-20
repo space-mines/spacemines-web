@@ -41,7 +41,7 @@ class Asteroid {
         scene.add(this.mesh);
     }
 
-    setRotation(x, y, z) {
+    rotate(x, y, z) {
         this.mesh.rotation.x += x;
         this.mesh.rotation.y += y;
         this.mesh.rotation.z += z;
@@ -88,7 +88,7 @@ function animate() {
         if(cube.radiation !== 0) {
             const speed = 1 + ndx * .1;
             const rot = 0.01 * speed;
-            cube.setRotation(rot, rot, 0);
+            cube.rotate(rot, rot, 0);
         }
     });
 
