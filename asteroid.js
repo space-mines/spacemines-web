@@ -48,6 +48,7 @@ class Asteroid {
         const geometry = new THREE.IcosahedronGeometry(1);
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(this.x, this.y, this.z);
+        this.mesh.asteroid = this;
         scene.add(this.mesh);
         return this.mesh;
     }

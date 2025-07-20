@@ -76,8 +76,9 @@ function onMouseDown(event) {
 
     for(let i = 0; i < intersects.length; ++i) {
         selected = intersects[i].object;
-        selected.position.z += 1;
-        console.log(selected);
+        console.log(selected.asteroid.radiation);
+        selected.asteroid.radiation += 1;
+        selected.material.color.setHex(selected.asteroid.getColor());
     }
 }
 
