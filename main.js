@@ -1,12 +1,13 @@
 import * as THREE from 'three';
 
+const canvas = document.querySelector('#c');
+const renderer = new THREE.WebGLRenderer({antialias: true, canvas});
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight,
     0.1, 5 );
 const color = 0xFFFFFF;
 const intensity = 3;
 const light = new THREE.DirectionalLight(color, intensity);
-const renderer = new THREE.WebGLRenderer();
 
 light.position.set(-1, 2, 10);
 scene.add(light);
@@ -32,8 +33,6 @@ const cubes = [
     create(geometry, 0x8844aa, -2),
     create(geometry, 0xaa8844,  2),
 ];
-
-scene.add( cubes );
 
 camera.position.z = 5;
 
