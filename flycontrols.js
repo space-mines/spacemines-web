@@ -8,8 +8,6 @@ class FlyControls {
         this.domElement = (domElement !== undefined) ? domElement : document;
         if (domElement) this.domElement.setAttribute('tabindex', -1);
 
-        // API
-
         this.movementSpeed = 1.0;
         this.rollSpeed = 0.005;
 
@@ -208,7 +206,7 @@ class FlyControls {
         this.rotationVector.y = (-this.moveState.yawRight + this.moveState.yawLeft);
         this.rotationVector.z = (-this.moveState.rollRight + this.moveState.rollLeft);
 
-        console.log('rotate:', [this.rotationVector.x, this.rotationVector.y, this.rotationVector.z]);
+        //console.log('rotate:', [this.rotationVector.x, this.rotationVector.y, this.rotationVector.z]);
 
     }
 }
