@@ -3,11 +3,12 @@ import * as THREE from 'three';
 const BLACK = 0x000000;
 const GRAY = 0x606060;
 const BLUE = 0x0000FF;
-const GREEN = 0x00FF00;
+const GREEN = 0x0000FF;
 const YELLOW = 0xFFFF00;
 const ORANGE = 0xFFA500;
 const RED = 0xFF0000;
-const MARKED = 0xFFFFFF;
+const BOMB = 0xAA00AA;
+const MARKED =0xFFFFFF;
 
 class Asteroid {
 
@@ -28,7 +29,7 @@ class Asteroid {
             case 3: return YELLOW;
             case 4: return ORANGE;
             case 5: return RED;
-            default: return GRAY;
+            default: return BOMB;
         }
     }
 
@@ -71,6 +72,7 @@ const asteroids = [
     new Asteroid(3, 3, 3, 3),
     new Asteroid(4, 4, 4, 4),
     new Asteroid(5, 5, 5, 5),
+    new Asteroid(6, 6, 6, 6),
 ]
 asteroids.forEach(asteroid => {
     if(asteroid.radiation !== 0) {
