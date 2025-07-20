@@ -1,1 +1,3 @@
-# spacemines-web
+# Spacemines Web (Three.js)
+
+`npm vite`
