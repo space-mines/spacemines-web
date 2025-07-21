@@ -24,16 +24,16 @@ renderer.setAnimationLoop( animate );
 document.body.appendChild( renderer.domElement );
 document.onmouseup = onMouseDown;
 
-const asteroids = [
-    new Asteroid(0, 0, 0, -1),
-    new Asteroid(1, 0, 5, 0),
-    new Asteroid(1, 1, 1, 1),
-    new Asteroid(2, 2, 2, 2),
-    new Asteroid(3, 3, 3, 3),
-    new Asteroid(4, 4, 4, 4),
-    new Asteroid(5, 5, 5, 5),
-    new Asteroid(6, 6, 6, 6),
-]
+let asteroids = [];
+
+for (let x = 0; x < 5; x++){
+    for (let y = 0; y < 5; y++){
+        for (let z = 0; z < 5; z++){
+            asteroids.push(new Asteroid(x, y, z, -1));
+        }
+    }
+}
+
 const mineMeshes = [];
 asteroids.forEach(asteroid => {
     if(asteroid.radiation !== 0) {
@@ -47,7 +47,8 @@ function animate() {
 
     asteroids.forEach((cube, ndx) => {
         if(cube.radiation !== 0) {
-            const speed = 1 + ndx * .1;
+            let modifier = ndx % 3;
+            const speed = 1 + modifier * .1;
             const rot = 0.01 * speed;
             cube.rotate(rot, rot, 0);
         }
@@ -74,8 +75,8 @@ function onMouseDown(event) {
     let intersects = raycaster.intersectObjects(mineMeshes);
     let selected;
 
-    for(let i = 0; i < intersects.length; ++i) {
-        selected = intersects[i].object;
+    if( intersects.length > 0) {
+        selected = intersects[0].object;
         console.log(selected.asteroid.radiation);
         selected.asteroid.radiation += 1;
         selected.material.color.setHex(selected.asteroid.getColor());

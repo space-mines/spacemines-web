@@ -45,7 +45,7 @@ class Asteroid {
 
     addToScene(scene) {
         const material = new THREE.MeshLambertMaterial({color: this.getColor()});
-        const geometry = new THREE.IcosahedronGeometry(1);
+        const geometry = new THREE.IcosahedronGeometry(.4);
         this.mesh = new THREE.Mesh(geometry, material);
         this.mesh.position.set(this.x, this.y, this.z);
         this.mesh.asteroid = this;
