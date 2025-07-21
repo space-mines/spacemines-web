@@ -4,7 +4,7 @@ import {Mesh} from "three";
 const BLACK = 0x000000;
 const GRAY = 0x606060;
 const BLUE = 0x0000FF;
-const GREEN = 0x0000FF;
+const GREEN = 0x00FF00;
 const YELLOW = 0xFFFF00;
 const ORANGE = 0xFFA500;
 const RED = 0xFF0000;
